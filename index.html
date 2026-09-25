@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NYC taxi operations intelligence</title><link rel="stylesheet" href="dashboard.css"></head>
+<body><header><div class="eyebrow">Business intelligence case study · NYC</div><h1 id="title"></h1><p id="subtitle"></p></header>
+<main class="wrap"><div id="filters" class="filters"></div><div id="count" class="eyebrow" style="margin-bottom:14px"></div><section id="cards" class="cards"></section><section class="grid"><article class="panel"><h2 id="chart-title-0"></h2><p id="chart-desc-0"></p><div id="chart-0" class="chart"></div></article><article class="panel"><h2 id="chart-title-1"></h2><p id="chart-desc-1"></p><div id="chart-1" class="chart"></div></article></section><aside class="note">Interpretation: source is a sampled subset of NYC TLC records. Counts and totals describe this sample only; missing boroughs and payments are labelled Unknown.<br>Public data: <a id="source" target="_blank" rel="noopener"></a>. Filter selections recalculate every KPI and chart.</aside></main><footer>Portfolio demonstration · descriptive analysis, not a forecast or production metric</footer>
+<script src="data.js"></script><script>window.APP={title:"NYC taxi operations intelligence",subtitle:"Inspect a public sample of March 2019 taxi trips by pickup borough and payment method. Hourly and daily charts reveal demand patterns within the sample.",filters:[{key:'borough',label:'Pickup borough'},{key:'payment',label:'Payment method'}],cards:[
+{label:'Trips',calc:r=>r.reduce((s,x)=>s+x.trips,0),note:'Valid pickup records'},
+{label:'Trip total',calc:r=>r.reduce((s,x)=>s+x.total,0),format:'currency',note:'Sum of reported total charges'},
+{label:'Average fare',calc:r=>{let n=r.reduce((s,x)=>s+x.trips,0);return n?r.reduce((s,x)=>s+x.fare,0)/n:0},format:'currency',note:'Fare amount ÷ trips'},
+{label:'Tips per trip',calc:r=>{let n=r.reduce((s,x)=>s+x.trips,0);return n?r.reduce((s,x)=>s+x.tip,0)/n:0},format:'currency',note:'Recorded tips ÷ trips'}
+],charts:[
+{key:'date',title:'Trip volume by pickup date',description:'Daily trip count in the public sample, not all NYC taxi trips.',type:'line',calc:r=>r.reduce((s,x)=>s+x.trips,0)},
+{key:'hour',title:'Trip volume by hour',description:'Local pickup hour, 00 to 23.',type:'bar',sort:(a,b)=>+a-+b,calc:r=>r.reduce((s,x)=>s+x.trips,0)}
+],source:"https://github.com/mwaskom/seaborn-data/blob/master/taxis.csv",sourceLabel:"NYC TLC sample via seaborn-data",unit:"aggregated groups"};</script><script src="dashboard.js"></script></body></html>
