@@ -6,6 +6,8 @@ Interactive BI case study built from a **public sample** of NYC Taxi and Limousi
 Which pickup hours are busiest within this sample, and how do trip volume and fares differ by pickup borough and payment method?
 
 ## Dashboard
+[Open the live dashboard](https://syamim5499.github.io/bi-nyc-taxi-operations/).
+
 Open [index.html](index.html) in a browser. No install or account required. Filters update all four KPIs and the daily and hourly charts. Hover over chart marks for exact values.
 
 ## Findings from the supplied sample
